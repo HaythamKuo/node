@@ -22,7 +22,7 @@ app.use(
   })
 );
 
-// //呼叫passport使用cookie 來處理驗證
+//呼叫passport使用cookie 來處理驗證, 初始化Passport並設定Session
 app.use(passport.initialize());
 app.use(passport.session());
 
