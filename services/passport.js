@@ -17,7 +17,6 @@ passport.serializeUser(
 );
 
 passport.deserializeUser((id, done) => {
-  console.log("這是id" + id);
   User.findById(id)
     .then((user) => done(null, user))
     .catch((err) => done(err, null));
@@ -42,10 +41,12 @@ passport.use(
         .then((existingUser) => {
           if (existingUser) {
             done(null, existingUser);
+            console.log(`這是${JSON.stringify(profile)}`);
           } else {
             new User({ googleId: profile.id })
               .save()
               .then((user) => done(null, user));
+            console.log(`這是${profile}`);
           }
         })
         .catch((err) => console.log(`這裡有錯誤：${err}`));

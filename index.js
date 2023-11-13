@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 const keys = require("./config/keys");
+const cors = require("cors");
 
 require("./models/Users");
 require("./services/passport");
@@ -13,6 +14,8 @@ mongoose
   .catch(() => console.log("連接失敗"));
 
 const app = express();
+
+app.use(cors());
 
 app.use(
   cookieSession({
@@ -25,6 +28,10 @@ app.use(
 //呼叫passport使用cookie 來處理驗證, 初始化Passport並設定Session
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get("/test", (req, res) => {
+  res.status(200).json({ name: "Max" });
+});
 
 require("./routes/authRoutes")(app);
 
