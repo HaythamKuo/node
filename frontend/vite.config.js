@@ -37,11 +37,6 @@ export default defineConfig({
         //secure: false,
         rewrite: (path) => path.replace(/^\/auth\/google/, "/auth/google"),
       },
-      "/test": {
-        target: "http://localhost:4000",
-        changeOrigin: true,
-        secure: false,
-      },
     },
     port: 3000,
   },
