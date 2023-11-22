@@ -30,5 +30,5 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-console.log(router);
+
 export { router };
