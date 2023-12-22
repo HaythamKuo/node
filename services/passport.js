@@ -7,14 +7,10 @@ const mongoose = require("mongoose");
 const User = mongoose.model("Users");
 
 //第一個參數是user model(從資料庫取出的instance) 第二個是已完成的參數
-passport.serializeUser(
-  (user, done) => {
-    //console.log("這是使用者:" + user);
-    done(null, user.id);
-  }
-
+passport.serializeUser((user, done) => {
   //這裡的user.id是mongo幫我創建的id
-);
+  done(null, user.id);
+});
 
 passport.deserializeUser((id, done) => {
   User.findById(id)
@@ -37,7 +33,7 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      const existingUser = await User.findOne({ googleId: profile.id }).exec();
+      const existingUser = await User.findOne({ googleId: profile.id });
 
       if (existingUser) {
         return done(null, existingUser);
